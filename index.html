@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- displays site properly based on user's device -->
+
+		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+		<title>Frontend Mentor | Advice generator app</title>
+
+		<!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+		<style>
+			.attribution {
+				font-size: 11px;
+				text-align: center;
+			}
+			.attribution a {
+				color: hsl(228, 45%, 44%);
+			}
+			body {
+				font-family: "Manrope", sans-serif;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet" />
+	</head>
+	<body class="text-white overflow-hidden bg-[#1f2632] tracking-wide">
+		<main class="w-full h-screen">
+			<div class="mx-5">
+				<div id="container" class="bg-[#323a49] max-w-prose md:w-96 h-auto p-5 rounded-md m-auto mt-[20%] relative z-10">
+					<!-- Advice # Advice ID goes here -->
+					<div class="flex w-full">
+						<p class="my-auto mx-auto"><span id="id" class="uppercase text-[#52ffa8] font-bold"></span></p>
+					</div>
+
+					<!-- "Advice text goes here" -->
+					<div class="flex">
+						<p class="my-auto mx-auto text-center">
+							<span id="advice" class="text-[28px]"></span>
+						</p>
+					</div>
+					<!-- play icon -->
+					<div class="flex w-full p-5 mb-5">
+						<svg height="16" xmlns="http://www.w3.org/2000/svg" class="block mx-auto object-fill">
+							<g fill="none" fill-rule="evenodd">
+								<path fill="#4F5D74" d="M0 8h196v1H0zM248 8h196v1H248z" class="-translate-x-[72px]" />
+								<g transform="translate(140)" fill="#CEE3E9">
+									<rect width="6" height="16" rx="3" />
+									<rect x="14" width="6" height="16" rx="3" />
+								</g>
+							</g>
+						</svg>
+					</div>
+				</div>
+			</div>
+			<!-- dice -->
+			<div class="mx-5">
+				<a href="" class="flex w-full mx-auto bg-[#52ffa8] hover:shadow-md hover:shadow-[#52ffa8] w-fit h-fit relative p-5 rounded-full mt-[-30px] z-20" target="self">
+					<div class="absolute inset-0 bg-[#52ffa8] hover:blur rounded-full"></div>
+					<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" class="relative z-30">
+						<path
+							d="M20 0H4a4.005 4.005 0 0 0-4 4v16a4.005 4.005 0 0 0 4 4h16a4.005 4.005 0 0 0 4-4V4a4.005 4.005 0 0 0-4-4ZM7.5 18a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"
+							fill="#202733"
+						/>
+					</svg>
+				</a>
+			</div>
+
+			<div class="attribution mt-5">Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#">Ronnie</a>.</div>
+		</main>
+		<script>
+			$(function () {
+				// Get Advice Information
+				fetch("https://api.adviceslip.com/advice")
+					.then((response) => response.json())
+					.then((data) => {
+						const id = data.slip.id;
+						const advice = data.slip.advice;
+						$("#id").text("Advice # " + id);
+						$("#advice").text('"' + advice + '"');
+					});
+			});
+		</script>
+	</body>
+</html>
